@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call, Apply, Bind</title>
+</head>
+<body>
+
+    <h1>Call, Apply, Bind</h1>
+
+    <script>
+
+        this.lugar = "GLOBAL";
+        function saludar () {
+            console.log(this.lugar);
+        }
+
+        const obj = {
+            lugar: "OBJETO"
+        }
+
+        // ambos imprimen objeto
+        // ya que con "call" y "apply"
+        // se llama a la funcion saludar para que haga parte del scope del objeto
+        saludar.call(obj);
+        saludar.apply(obj);
+
+        console.log("------------");
+
+        const persona = {
+            nombre: "ulisesafcdev",
+            saludar: function () {
+                console.log(`Hola ${this.nombre}`);
+            }
+        }
+
+        persona.saludar();
+
+        const otrapersona = {
+            // con bind se enlaza el scope de la funcion de otro objeo con este
+            saludar: persona.saludar.bind(persona)
+        }
+
+        otrapersona.saludar();
+
+    </script>
+    
+</body>
+</html>

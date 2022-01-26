@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol</title>
+</head>
+<body>
+
+    <h1>Symbol</h1>
+    <p>
+        Nuevo tipo de dato, Symbol.
+    </p>
+
+    <script>
+
+        /* let idunico = Symbol("id");
+        let idunico2 = Symbol("id");
+
+        console.log(idunico === idunico2);
+        console.log(idunico, idunico2);
+        console.log(typeof idunico, typeof idunico2); */
+
+        // -------------------------------------------
+
+        const NOMBRE = Symbol("data_name");
+        const EDAD = Symbol("data_age");
+
+        const datosUsuario = {
+            [NOMBRE]: "ulisesafcdev",
+            [EDAD]: 23,
+            telefono: 12345678,
+            age: 1999
+        }
+
+        console.log(datosUsuario);
+
+        for (let prop in datosUsuario) {
+            console.log(`${prop}, ${datosUsuario[prop]}`);
+        }
+        
+        console.log(Object.getOwnPropertySymbols(datosUsuario));
+        // console.log(`${datosUsuario[NOMBRE]}, ${datosUsuario[EDAD]}`);
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Loop</title>
+    <style>
+        body{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-color: #222;
+            color: #d4d800;
+        }
+        a{
+            color: #269cd3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Asincronia y el Event Loop</h1>
+
+    <p>
+        <ul>
+            <li>Procesamiento de datos Single Thread y Multi Thread</li>
+            <p>
+                JavaScript trabaja sobre un modelo asincrono y no bloqueante y tiene un loop de eventos
+                implementados de un solo hilo (Single Thread) para operaciones de entrada y salida. Gracias a esto JavaScript es altamente concurrente.
+            </p>
+            <img src="EventLoop.png" alt="">
+            <img src="concurrent.png" alt="" id="imagen" style="width: 1000px; height: 650px;">
+
+            <hr>
+            <li>Operaciones de CPU</li>
+            <p>
+                Son aquellos que se llevan mas tiempo de procesar "x" tarea en nuestro CPU. Por ejemplo, al entrar en un error logico en una estructura repetitiva podemos causar un bucle y este se vera en la obligacion de consumir la memoria de nuestro navegador, dicho proceso empezara a trabajar el CPU y llegar a causar un crasheo porque nunca termina el bucle.
+            </p>
+
+            <li>Operaciones de I/O</li>
+            <p>
+                Operaciones de entrada y salida (input, output), se ven la mayor parte esperando una peticion a un recurso que han solicitado. Por ejemplo, que enviemos un formulario en nuestra pagina web a un servidor y estamos esperando una notificacion en donde nos indique que se ha recibido la informacion satisfactoriamente.
+            </p>
+
+            <li>Operaciones Concurrentes y Paralelas</li>
+            <p>
+                Operaciones concurrentes, son aquellas donde una o mas tareas se ejecutan progresivamente, al terminar una tarea se ejecuta la siguiente inmediatamente <a href="#img2">como en la imagen</a>, ó puede ser que una tarea este por ejecutarse en un lapso de 10 segundos, esa tarea se mantiene a la espera de su ejecucion mientras que las demas tareas concurren progresivamente, asi como el ejemplo de <a href="#imagen">la siguiente imagen</a>.
+            </p>
+            <img src="concurrente.png" alt="" id="img2">
+            <p>
+                Operaciones paralelas, son aquellas tareas que se ejecutan al mismo tiempo o al iniciar "x" proceso.
+            </p>
+
+            <li>Operaciones bloqueantes y no bloqueantes</li>
+            <p>
+                Operaciones bloqueantes son aquellas tareas que se ejecutan progresivamente pero que NO devuelven el resultado al hilo principal hasta que se terminen de realizar todas las tareas.
+                <br><br>
+                Operaciones NO bloqueantes, son aquellas tareas que al terminar mandan su resultado al hilo principal.
+            </p>
+
+            <li>Operaciones Sincronas y Asincronas</li>
+            <p>
+                Operaciones sincronas son aquellas que devuelven el resultado al presente, osea al instante, en cambio las Operaciones Asincronas devuelven el resultado en un futuro, osea en un intervalo de tiempo.
+            </p>
+        </ul>
+    </p>
+
+    <script>
+
+        (() => { // sincrono bloqueante
+
+            console.log("Codigo Sincrono");
+            console.log("Inicio");
+
+            function dos() {
+                console.log("Funcion DOS");
+            }
+
+            function uno() {
+                console.log("Funcion UNO");
+                dos();
+                console.log("Finalmente TRES");
+            }
+
+            uno();
+            console.log("FIN");
+
+        })();
+
+        // asincrono no bloqueante
+
+        (() => {
+            console.log("Codigo Asincrono");
+            console.log("Inicio");
+
+            function dos() {
+                setTimeout(() => {
+                    console.log("Funcion DOS");
+                },1000)
+            }
+
+            function uno() {
+                setTimeout(() => {
+                    console.log("Funcion UNO");
+                },0)
+
+                dos();
+                console.log("Tres");
+            }
+
+            uno(); 
+            
+            // se manda a llamar el metodo uno
+            /* 
+
+                el metodo uno() evalua el setTimeout que imprime uno
+                PERO ya q es es un setTimeout se manda a la pila de callback
+                luego el metodo dos() evalua el setTimeout que imprime dos
+                PERO ya q es es un setTimeout se manda a la pila de callback
+
+                HASTA AQUI "YA SE HIZO LA PETICION" a una webapi "simulando"
+                luego que ya se apilaron los callback continua con lo demas se imprime "tres"
+                y se imprime "fin"
+
+                LUEGO SIGUEN LAS PETICIONES QUE SE HICIERON "LOS CALLBACK"
+                imprime "uno"
+                imprime "dos"
+            
+            */
+            console.log("FIN");
+
+        })();
+
+    </script>
+    
+</body>
+</html>

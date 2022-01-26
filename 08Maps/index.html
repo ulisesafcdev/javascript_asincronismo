@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps</title>
+</head>
+<body>
+
+    <h1>Maps</h1>
+
+    <script>
+
+        let mapa = new Map();
+        mapa.set("name", "ulisesafcdev");
+        mapa.set("age", "1999");
+        mapa.set(18, "dieciocho");
+        mapa.set(null, "null");
+
+        console.log(mapa);
+        console.log(mapa.size);
+
+        
+        console.log(mapa.has("age")); // devuelve true
+        console.log(mapa.get("name")); // devuelve el valor
+
+        for (let [key, value] of mapa) {
+            console.log(`Llave: ${key} // Valor: ${value}`);
+        }
+
+        // otra manera de crear un Map
+        const mapa2 = new Map([
+            ["user", "uafc99"],
+            ["email", "gmail.com"],
+            ["edad", 22]
+        ]);
+
+        console.log("------------------");
+        console.log(mapa2);
+
+        console.log("------------------");
+        const llavesMap = [...mapa2.keys()];
+        const valoresMap = [...mapa2.values()];
+        
+        console.log(llavesMap);
+        console.log(valoresMap);
+
+    </script>
+    
+</body>
+</html>

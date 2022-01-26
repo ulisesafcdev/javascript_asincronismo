@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxies</title>
+</head>
+<body>
+
+    <h1>Proxies</h1>
+
+    <script>
+
+        // un proxy esta formado por un objeto literal y un manejador
+        // los proxies nos ayudan a hacer validaciones a las propiedades de nuestro objeto
+        // con la ayuda del handler hacemos eso posible
+
+        const user = {
+            nombre: "",
+            apellido: "",
+            edad: 0
+        }
+
+        const manejador = {
+            set(obj,prop,valor) {
+
+                if (Object.keys(obj).indexOf(prop) === -1) {
+                    return console.log(`La propiedad: ${prop}, no existe en el objeto principal!`);
+                }
+
+                if (prop === "edad" && valor < 0) {
+                    return console.log("La edad debe ser un numero positivo!");
+                }
+
+                obj[prop] = valor;
+            }
+        }
+
+        console.log(user);
+
+        const odiseo = new Proxy(user, manejador);
+
+        odiseo.nombre = "ulisesafcdev";
+        odiseo.apellido = "afc";
+        odiseo.edad = -23;
+        odiseo.twitter = "ulisesafcdev";
+
+        console.log(user);
+        console.log(odiseo);
+
+    </script>
+    
+</body>
+</html>

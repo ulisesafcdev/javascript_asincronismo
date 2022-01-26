@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This</title>
+</head>
+<body>
+
+    <h1>This</h1>
+
+    <script>
+
+        // this hace referencia al objeto global
+        console.log(this); // devuelve el objeto window
+        console.log(window);
+        console.log(this === window); // true
+
+        this.nombre = "Contexto Global";
+        function imprimir () {
+            console.log(this.nombre);
+        }
+
+        imprimir();
+
+        // ----------------------
+
+        // las funciones anonimas se mantienen en el ambito en donde se encuentran
+        // las funciones anonimas generan su propio scope de donde se han creado.
+
+        const obj = {
+            nombre: "Contexto Objeto",
+            imprimir: function () {
+                console.log(this.nombre);
+            }
+        }
+
+        obj.imprimir();
+
+        // ----------------------
+
+        const obj2 = {
+            nombre: "Contexto Objeto 2",
+            imprimir
+        }
+
+        obj2.imprimir();
+
+        // ----------------------
+        // las arrow function no generan su propio scope
+
+        const obj3 = {
+            nombre: "Contexto Objeto 3",
+            imprimir: () => { // mantienen un enlace con el contexto padre de donde se encuentran
+                console.log(this.nombre);
+            }
+        }
+
+        obj3.imprimir();
+
+        // ----------------------
+        console.log("_-----------------_");
+
+        function Persona(nombre) { // esta funcion genera su propio scope y
+            this.nombre = nombre; // este es su valor
+
+            // se retorna una funcion anonima dentro de otra funcion anonima
+            //return function () { 
+                // al retornar una funcion anonima este generara su scope 
+                //console.log(this.nombre); // aca retornara CONTEXTO GLOBAL
+                // retorna contexto global ya que al no encontrar un valor como "nombre" en su propio scope
+                // se retrocede al contexto global donde encuentra "nombre"
+            //}
+
+            return () => {
+                console.log(this.nombre); // aca si retorna el valor que se le da al intanciar
+                // ya que las arrow function no generan su propio scope si no que toman su scope del 
+                // elemento padre de donde se encuentran
+            }
+        }
+
+        const odiseo = new Persona("odiseo");
+        odiseo();
+
+    </script>
+    
+</body>
+</html>

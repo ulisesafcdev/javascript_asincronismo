@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sets</title>
+</head>
+<body>
+
+    <h1>Sets</h1>
+
+    <script>
+
+        const set = new Set([1,2,3,4,5,true,false,false,{},{},"hola","Hola"]);
+
+
+        console.log(set);
+        console.log(set.size);
+
+        // set.add(6);
+        // set.add(7);
+        // set.add("hola mundo");
+        // set.add(true);
+
+        // set guarda valores unicos de diferentes tipos
+
+        console.log(set);
+
+        for (item of set) {
+            console.log(item);
+        }
+
+        set.forEach(el => {
+            console.log(el);
+        })
+
+        console.log(set[4]); // a pesar que los set son iterables, no podriamos acceder a un elemento
+        // para eso tendriamos que usar otros metodos
+        console.log(set);
+
+        let arr = Array.from(set);
+
+        console.log(arr);
+        console.log(arr[4]);
+
+        // para eliminar un elemento del set
+        set.delete("hola");
+        console.log(set);
+        // para saber si hay un elemento
+        console.log(set.has("hola mundo")); // devuelve true o false
+
+        // para limpiar por completo un set
+        set.clear();
+        console.log(set);
+
+    </script>
+    
+</body>
+</html>

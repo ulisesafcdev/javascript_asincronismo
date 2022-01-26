@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizadores</title>
+</head>
+<body>
+
+    <h1>Temporizadores</h1>
+    <h3>SetTimeOut()<br>SetInterval()</h3>
+
+    <script>
+
+        let temporizador = setTimeout(() => { // se ejecuta despues de cierto tiempo ezpresado en ms
+            console.log("Se ejecuta despues de haber pasado 3 segundos");
+        }, 3000)
+
+        clearTimeout(temporizador); // detiene el temporizador
+        console.log("Despues de clearTimeOut");
+
+        console.log("******************************");
+
+        let tempo = setInterval(() => { // se ejecura cada cierto tiempo
+            console.log(`Hora: ${new Date().toLocaleTimeString()}`);
+        },1000)
+        clearInterval(tempo);
+        console.log("Despues de clearInterval");
+
+    </script>
+    
+</body>
+</html>
